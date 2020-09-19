@@ -98,7 +98,8 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        $course->students()->delete();
+        //return $course->enrollments()->get();
+        $course->enrollments()->delete();
         $course->delete();
         return redirect()->route('course')->with('status', 'Course Deleted Sucssessfuly');
     }

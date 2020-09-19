@@ -26,7 +26,7 @@ Auth::routes(['verify' => true]);
 
 
 // for admin
-Route::middleware(['Admin'])->group(function () {
+Route::middleware(['auth','Admin'])->group(function () {
     Route::get('/Admin', [App\Http\Controllers\HomeController::class, 'index'])->name('Admin')->middleware('verified');
 
     Route::resource('/Admin/courses', 'App\Http\Controllers\CourseController');
@@ -37,7 +37,7 @@ Route::middleware(['Admin'])->group(function () {
 });
 
 // for student 
-Route::middleware(['Student'])->group(function () {
+Route::middleware(['auth','Student'])->group(function () {
     Route::get('/home', 'App\Http\Controllers\HomeController@userIndex')->name('home')->middleware('verified');
     Route::post('/Enroll', 'App\Http\Controllers\EnrollmentController@store')->name('store');
     Route::delete('/Drop', 'App\Http\Controllers\EnrollmentController@destroy')->name('drop');
